@@ -1,0 +1,9 @@
+{
+  "name": "2020-aoc",
+  "version": "1.0.0",
+  "description": "Node.js Advent of Code 2020",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
