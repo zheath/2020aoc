@@ -24,7 +24,7 @@ function isValidData(data) {
     if(!(parseInt(data.iyr) >= 2010 & parseInt(data.iyr) <= 2020)){ console.log('invalid iyr'); return false };
     if(!(parseInt(data.eyr) >= 2020 & parseInt(data.eyr) <= 2030)){ console.log('invalid eyr'); return false };
     if(!validHeight(data.hgt)){ console.log('invalid hgt'); return false };
-    if(!/^#[A-Za-z0-9]{6}$/.test(data.hcl)){ console.log('invalid hcl'); return false };
+    if(!/^#[a-z0-9]{6}$/.test(data.hcl)){ console.log('invalid hcl'); return false };
     if(!['amb','blu','brn','gry','grn','hzl','oth'].includes(data.ecl)){ console.log('invalid ecl'); return false };
     if(!/^\d{9}$/.test(data.pid)){ console.log('invalid pid'); return false };
     return true;
