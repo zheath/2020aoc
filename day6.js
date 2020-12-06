@@ -3,9 +3,9 @@ const print = require('./helpers/print');
 const getFileData = require('./helpers/getFileData');
 const _ = require("lodash");
 
-const test = getFileData('/day6_real.txt','\n\n').map(el => el.split('\n'));
+const input = getFileData('/day6_real.txt','\n\n').map(el => el.split('\n'));
 const cds = [];
-test.forEach(answer => {
+input.forEach(answer => {
     const cd = new CustomsDeclaration(answer);
     cds.push(cd);
 })
