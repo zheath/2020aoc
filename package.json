@@ -4,6 +4,7 @@
   "description": "Node.js Advent of Code 2020",
   "license": "MIT",
   "dependencies": {
+    "fs": "0.0.1-security",
     "lodash": "^4.17.15"
   }
 }
