@@ -34,7 +34,7 @@ class SeatModel {
             //console.log(posn);
             if(seat.getType() == 'SEAT'){
                 const occAdj = this.seatGrid.getAdjacents(posn);
-                //if(posn.y == 0){console.log(JSON.stringify(posn) + ' ' + JSON.stringify(occAdj))}
+                if(posn.y == 9){console.log(JSON.stringify(posn) + ' ' + JSON.stringify(occAdj))}
                 if(seat.isOccupied()){
                     if(occAdj.length >= 5){
                         //if(posn.y == 0){console.log('adding to vacate list')};

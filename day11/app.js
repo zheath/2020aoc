@@ -2,7 +2,7 @@
 const SeatModel = require("../classes/SeatModel");
 const getFileData = require('../helpers/getFileData');
 const print = require('../helpers/print');
-const data = getFileData('/day11/test1.txt','\n').map(row => row.split(""));
+const data = getFileData('/day11/input.txt','\n').map(row => row.split(""));
 
 const sm = new SeatModel(data);
 let done = false;

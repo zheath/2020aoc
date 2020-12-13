@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 class Grid {
     constructor(rows, cols, data){
         this.rows = rows;
@@ -15,22 +17,41 @@ class Grid {
     }
     getAdjacents(point){
         const output = [];
-        for(var yOffset = -1; yOffset <= 1; yOffset++){
-            for( var xOffset = -1; xOffset <= 1; xOffset++) {
-                if(xOffset != 0 || yOffset != 0){//ignore given point
-                    if(this.inBounds({x: point.x + xOffset, y: point.y + yOffset})){
-                        const node = this.nodes[point.y + yOffset][point.x + xOffset];
-                        if(node.getType() == 'SEAT'){
-                            output.push(node);
-                        }                        
-                    }
-                }
-            }
-        }
+        const directions = [1,2,3,4,5,6,7,8];
+        directions.forEach(dir => {
+            const seat = this.findFirstSeat(point, dir);
+            if(!_.isEmpty(seat)){output.push(seat)}
+        })
         return output;
     }
     print(){
         this.nodes.forEach(row => console.log(row.join(",")))
+    }
+    findFirstSeat(point, direction){
+        let output = {};
+        let nextPoint = {...point};
+        //console.log('');
+        //console.log(`Starting point: ${JSON.stringify(nextPoint)}`)
+        while(true){
+            switch(direction){
+                case 1: nextPoint = {x: nextPoint.x, y: nextPoint.y - 1}; break; //up
+                case 2: nextPoint = {x: nextPoint.x + 1, y: nextPoint.y - 1}; break; //up-right
+                case 3: nextPoint = {x: nextPoint.x + 1, y: nextPoint.y}; break; //right
+                case 4: nextPoint = {x: nextPoint.x + 1, y: nextPoint.y + 1}; break; //down-right
+                case 5: nextPoint = {x: nextPoint.x, y: nextPoint.y + 1}; break; //down
+                case 6: nextPoint = {x: nextPoint.x - 1, y: nextPoint.y + 1}; break; //down-left
+                case 7: nextPoint = {x: nextPoint.x - 1, y: nextPoint.y}; break; //left
+                case 8: nextPoint = {x: nextPoint.x - 1, y: nextPoint.y - 1}; break; //up-left
+                default: throw new Error('Unknown direction!')
+            }
+            if(!this.inBounds(nextPoint)){/*(console.log(`Out of bounds for ${direction}.`);*/return {}};
+            output = this.nodes[nextPoint.y][nextPoint.x];
+            if(output.getType() == 'SEAT'){
+                //console.log(`Found seat going ${direction} at point ${JSON.stringify(nextPoint)}.`);
+                if(output.isOccupied()){ return output };
+                return {};
+            }
+        }
     }
 }
 
