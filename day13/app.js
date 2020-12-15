@@ -1,6 +1,6 @@
 const Boat = require('../classes/Boat');
 const getFileData = require('../helpers/getFileData');
-const notes = getFileData('/day13/test6.txt','\n');
+const notes = getFileData('/day13/input.txt','\n');
 //console.log(notes);
 const earliestDeparture = parseInt(notes[0]);
 const busIds = notes[1].split(',').filter(busId => busId != 'x').map(id => parseInt(id));
@@ -38,7 +38,8 @@ console.log(answer, answer.waitTime*answer.busID);
 function calcTime(){
     let failed = false;
     let done = false;
-    let t = 0;
+    let t = 800000000000000;
+    const end = 850000000000000;
     while(!done){
         t += 1;
         //console.log(`Testing time ${t}.`)
@@ -50,8 +51,9 @@ function calcTime(){
             //console.log(`Restriction mod for ${JSON.stringify(rest)}: ${mod}`);
             if(mod != 0){ failed = true }
         })
+        if(t%100000000==0){console.log(`just finished time: ${t}`)}
         if(!failed){ done = true } else { failed = false };
-        //if(t > 1068781){ break }
+        if(t == end){ console.log('no valid time in this range'); break; }
     }
     return t;
 }
