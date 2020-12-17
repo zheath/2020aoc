@@ -24,25 +24,8 @@ class TicketScanner {
     }
     scan(){
         this.removeInvalidTickets();
-        const pMap = {};
-        //init pMap
         this.tickets[0].forEach((num, i) => pMap[i+1] = []);
-        this.tickets.forEach(ticket => ticket.forEach((num,i) => pMap[i+1].push(num)));
-        for(const position in pMap){
-            const nums = pMap[position];
-            const testFeatures = pMap[position].map(num => this.getFeatures(parseInt(num)));
-            const commonFeatures = findCommon(testFeatures);
-            const commFeature = commonFeatures.filter(feat => !this.taken.includes(feat))[0];
-            /*if(!commFeature){                
-                print(['Numbers',JSON.stringify(nums),'possible features',testFeatures[0],'common options',commonFeatures,'taken', this.taken, 'answer:',commFeature]);
-                console.log('');
-                console.log('');
-            }*/
-            pMap[position] = commFeature;
-            this.taken.push(commFeature);
-        }
-        //console.log(pMap);
-        return pMap;
+        //const matrix = this.tickets.map(ticket => ticket.map(num => ))
     }
     getFeatures(num){
         const output = [];
