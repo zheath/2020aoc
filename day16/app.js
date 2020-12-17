@@ -12,8 +12,10 @@ const features = input[0].map(feature => {
 const myTicket = input[1][1].split(",");
 const otherTickets = input[2].slice(1).map(ticket => ticket.split(","));
 const ts = new TicketScanner(features, otherTickets, myTicket);
-//console.log(ts);
 const results = ts.scan();
+ts.printFeatures();
+
+/*
 const keys = [];
 for (const key in results){
     const test = results[key] ? results[key] : '';
@@ -27,4 +29,4 @@ console.log(answer.reduce((acc, x) => acc * x, 1));
 
 console.log(ts.taken.filter(t => t));
 console.log(ts.features);
-//duration, row, seat, train
+//duration, row, seat, train*/

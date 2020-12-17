@@ -1,5 +1,7 @@
 const _ = require("lodash");
 function findCommon(test) {
+    console.log('');
+    console.log(test);
     const num = test.length;
     let output = [];
     const values = test.reduce((arr, t) => arr + ',' + t.join(","), '').split(",").filter(val => val.length > 0);
