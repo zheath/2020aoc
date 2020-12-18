@@ -1,6 +1,6 @@
 const solveExpression = require("./solveExpression");
 const isGroup = /\((?!.+\().+?\)/g;
-const sum = /\d+ \+ \d+/g;
+const sum = /(?<!\+ )\d+ \+ \d+/g;
 
 function solveProblem(problem){
     //console.log(`Probelem pre-cleaning: ${problem}`);
