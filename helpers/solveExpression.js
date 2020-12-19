@@ -1,26 +1,31 @@
 const operations = {
-    '+': (a, b) => a + b,
-    '-': (a, b) => a - b,
-    '*': (a, b) => a * b
+    '+': (a, b) => parseInt(a) + parseInt(b),
+    '-': (a, b) => parseInt(a) - parseInt(b),
+    '*': (a, b) => parseInt(a) * parseInt(b)
 }
 
 const isNumber = /\d+/g;
+const isAddTerm = /\d+\+\d+/;
 
 function solveExpression(exp){
-    //console.log(`In solve1 for ${exp}`)
-    const digits = exp.match(isNumber);
-    const d1 = parseInt(digits.slice(0,2)[0]);
-    const d1len = d1.toString().length;
-    const d2 = parseInt(digits.slice(0,2)[1]);
-    const d2ind = exp.indexOf(d2, d1len+1);
-    const d2len = d2.toString().length;
-    const operator = exp.substring(d2ind-1,d2ind);
-    const a = operations[operator](d1, d2);
-    if(digits.length == 2){
-        return a;
-    } else {
-        return solveExpression(a.toString() + exp.substring(d2ind+d2len))
+    let addDone = false;
+    //do addition first
+    while(!addDone){
+        const addTerm = exp.match(isAddTerm);
+        console.log(addTerm);
+        if(addTerm){
+            const nums = addTerm[0].match(isNumber);
+            console.log(nums);
+            const ans = operations["+"](nums[0], nums[1]);
+            console.log(ans);
+            exp = exp.replace(addTerm, ans)
+            console.log(exp);
+        } else {
+            addDone = true;
+        }
     }
+    //do multiplication
+    return exp.match(isNumber).reduce((acc, x) => acc * parseInt(x), 1);
 }
 
 module.exports = solveExpression;
